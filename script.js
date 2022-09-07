@@ -1,6 +1,6 @@
 console.log("Hello World");
 
-console.log(new Object()); // {}
+console.log(new Object()); // {}object就是对象，就比如衣服，汽车，房子，这些都是对象
 console.log(new Array()); // []
 console.log(new Set()); //集合，里面的东西不能重复 set(0)
 console.log(new Map()); // map(0)
@@ -174,16 +174,15 @@ const weakSet = new WeakSet();
   const array1 = ["a", "b", "c"];
   const array2 = ["c", "d", "c", "f"];
   const array3 = array1.concat(array2); //拼合在一块不会覆盖，但要分开添加
-  console.log(array3); //'a', 'b', 'c','c', 'd', 'c', 'f'
-
+  console.log(array3); //'a', 'b', 'c','c', 'd', 'c', 'f',把两个数组拼成一个数组成为一个全新的数组
   console.log(array1);
   const array4 = array1 + array2;
   console.log(array4);
   console.log(array4, typeof array4); //a,b,cc,d,e,f string
 
   const string1 = array1.join("") + array2.join("");
-  console.log(string1); //abccdef
-  console.log(Array.from(string1)); //'a', 'b', 'c','c', 'd', 'c', 'f'//可以无限连加，一次性添加。先join再拆开
+  console.log(string1); //abccdef，把数组里面的元素链接起来成为一个字符串
+  console.log(Array.from(string1)); //'a', 'b', 'c','c', 'd', 'c', 'f'//可以无限连加，一次性添加。from 先join再拆开。
 }
 
 {
@@ -312,14 +311,15 @@ console.log(allWords.slice(1, 3)); // World I'm 左臂右开原则；1,2 要（�
     //const result = (sth === +sth)
     //console.log(result);
     //return result
-    return sth === +sth; //作比较
+    return sth === +sth; //=== 用来作比较
   }
   function A() {
     return "a";
   }
+//function（）里面的是参数，需要设置一个参数并且使用它就在括号里面加上，如果括号是空的就是不需要这个参数
 
   const content = A();
-  console.log(content);
+  console.log(content); //A()你这个不需要用到任何参数，那就空着
 
   function B(sth) {
     console.log(sth);
@@ -342,7 +342,7 @@ console.log(allWords.slice(1, 3)); // World I'm 左臂右开原则；1,2 要（�
   const flatList = list.flat(Infinity);
 
   function isNumber(something) {
-    return something === +something;
+    return something === +something;//===返回的是boolean值
   }
 
   const filterList = flatList.filter((element) => isNumber(element));
@@ -363,5 +363,5 @@ console.log(allWords.slice(1, 3)); // World I'm 左臂右开原则；1,2 要（�
   console.log(b, typeof b);
   console.log(+a, typeof +a);
   console.log(a === +a); //三个等号，严格相等;两个等号，不严格
-  console.log(b === +a); // 加 + 可将string变为number，string是一串字体可以加在一起
+  console.log(b === +a); // 加 + 可将string变为number，string是字符串可以加在一起，加引号的都是string字符串
 }
