@@ -1,6 +1,5 @@
-console.log("Hello World");
-
-console.log(new Object()); // {}object就是对象，就比如衣服，汽车，房子，这些都是对象
+console.log("Hello World"); // new 是复杂类型，开辟空间
+console.log(new Object()); // 等于const obj = {} object就是对象，就比如衣服，汽车，房子，这些都是对象
 console.log(new Array()); // []
 console.log(new Set()); //集合，里面的东西不能重复 set(0)
 console.log(new Map()); // map(0)
@@ -11,8 +10,8 @@ const object = new Object(); //()里面有参数的意思
 const array = new Array();
 const set = new Set();
 const map = new Map();
-const weakMap = new WeakMap();
-const weakSet = new WeakSet();
+const weakMap = new WeakSet();
+const weakSet = new WeakMap();
 
 // Object;基于对象
 // Object.assign() 分配，里面的东西拼合使用的
@@ -26,10 +25,10 @@ const weakSet = new WeakSet();
   const source = { b: 4, c: 5 };
 
   const returnedTarget = Object.assign(target, source);
-  //用assign 后面覆盖前面并且合并放到前面的变量（target 被破坏被后面的覆盖）
+  //有相同部分用assign 后面覆盖前面并且合并放在一起（target 被破坏被后面的覆盖）
 
   console.log(returnedTarget);
-  console.log(target); //target也变了，破坏了原来的数据
+  console.log(target); //target没变没破坏原来的数据
   console.log(source); //source没变
 }
 
@@ -45,6 +44,30 @@ const weakSet = new WeakSet();
 
 {
   const obj1 = {
+    name: "Raymond",
+    age: 18
+  }
+
+  const obj2 = new Object({
+    name: "Raymond",
+    age: 18
+  })
+
+
+console.log(obj1);
+console.log(obj2);
+
+const obj3 = Object.create(obj2)
+console.log(obj3);
+console.log(obj3.name, obj3.age);
+obj3.name = "Tianyang", obj3.age = 1
+console.log(obj3);
+console.log(obj3.name, obj3.age);
+}
+
+
+{
+  const obj1 = {
     name: "kristy",
     age: 1,
   };
@@ -53,7 +76,7 @@ const weakSet = new WeakSet();
     age: 18,
     draw: function () {
       console.log(`Name: ${this.name}, Age:${this.age}`);
-    }, //function 添加最新的数据
+    }, //function 添加最新的数据 prototype 原型
   });
 
   console.log(obj1);
@@ -123,7 +146,7 @@ const weakSet = new WeakSet();
   console.log(obj4.hasOwnProperty("age"));
 
   console.log(obj4.__proto__); //动用了内部的属性。从内部手段改原型。等于作弊。不建议用
-  console.log(obj.isPrototypeOf(obj4)); //查找obj是不是obj4的原型，是显示true，不是显示false
+  console.log(obj.isPrototypeOf(obj4)); //查找obj是不是obj4的原型，是就显示true，不是就显示false
   console.log(obj2.isPrototypeOf(obj4));
   console.log(obj3.isPrototypeOf(obj4));
 }
@@ -134,7 +157,7 @@ const weakSet = new WeakSet();
 
 {
   const name = "Ethan Zhang";
-  const arrayName = Array.from(name); //from 注意有空格也会被分别拆开作为一个元素
+  const arrayName = Array.from(name); //from用来拆分的时候注意有空格也会被分别拆开作为一个元素
 
   const newArrayName = arrayName.filter((element) => element != " "); //filter用来排除掉是''的元素，即符合不等于''的条件。放的是被留下来的部分
 
@@ -142,25 +165,25 @@ const weakSet = new WeakSet();
   console.log(newArrayName); //空格被去掉的array，不可以直接用set 去重，因为字母a也会被去重
 
   console.log(Array.isArray(name), typeof name); // false, `string`
-  console.log(Array.isArray(arrayName), typeof arrayName); // true,'object';typeof 返回object 所以要这样判断是不是array
+  console.log(Array.isArray(arrayName), typeof arrayName); // true,'object';typeof 返回object。 所以要这样判断是不是array
 
   //join用于拆开后再合并
   console.log(arrayName.join()); // 结果会有逗号：E,t,h,a,n,,,Z,h,a,n,g
-  console.log(arrayName.join("")); //用''替换逗号，结果和原来name一样：Ethan Zhang
+  console.log(arrayName.join("")); //用""替换逗号，结果和原来name一样：Ethan Zhang
   console.log(arrayName.join("_")); //E_t_h_a_n_ _Z_h_a_n_g 中间包含空格
   console.log(newArrayName.join("")); //EthanZhang 已用filter所以没有空格
   console.log(newArrayName.join("_")); // E_t_h_a_n_Z_h_a_n_g
 }
 
-// Array.prototype.concat()所以东西合并在一起，包括重复的部分
+// Array.prototype.concat()所以东西合并在一起，包括重复的部分变成全新的数组array
 // Array.prototype.filter()寻找多个，包含所有符合条件的
-// Array.prototype.join()和from一起用的，先加后拆
+// Array.prototype.join()把数组里面的元素链接起来成为一个字符串string，可以和from一起用的，先加后拆
 // Array.prototype.map()所有东西统一做一系列操作
 // Array.prototype.find()从头找一个
 // Array.prototype.findIndex()从头找，包括标志位
 // Array.prototype.findLast()从后找一个
 // Array.prototype.findLastIndex()从后找，包括标志位
-// Array.prototype.flat()扁平化
+// Array.prototype.flat()扁平化  flat(infinity)全部撑平
 // Array.prototype.keys()
 // Array.prototype.values()
 // Array.prototype.pop()
@@ -182,7 +205,7 @@ const weakSet = new WeakSet();
 
   const string1 = array1.join("") + array2.join("");
   console.log(string1); //abccdef，把数组里面的元素链接起来成为一个字符串
-  console.log(Array.from(string1)); //'a', 'b', 'c','c', 'd', 'c', 'f'//可以无限连加，一次性添加。from 先join再拆开。
+  console.log(Array.from(string1)); //'a', 'b', 'c','c', 'd', 'c', 'f'//join可以无限连加，一次性添加。先join再from拆开。
 }
 
 {
@@ -200,18 +223,18 @@ const weakSet = new WeakSet();
   console.log(foundLastIndex, array1[foundLastIndex]); //5,55，也就是55的标志位5
 
   const filter = array1.filter((element) => element > 40);
-  console.log(filter); //【130,71,55】，所以符合条件的元素组成的数组
+  console.log(filter); //(3)【130,71,55】，找所有提取用的。所有符合条件的元素组成的数组
 
   const map = array1.map((element) => element * 10);
   console.log(map); // [50, 120, 80, 1300, 710, 550]
-} //map 用来做group操作
+} //map 在所有元素的基础上用来做group操作
 
 const string = "Hello World I'm Kristy";
 
-const allWords = string.split(" ");
+const allWords = string.split(" "); //按中间的空格来拆分的string
 console.log(allWords);
 
-console.log(string.split("")); //Array.from(string)
+console.log(string.split("")); //Array.from(string)逐个元素拆开含空格的array
 
 console.log(allWords.slice(1, 3)); // World I'm 左臂右开原则；1,2 要（左边要右边的不要）。如果只有一个数字，从包含那个数字开始往后数（1）=1,2,3 （2）=2,3
 
@@ -219,7 +242,7 @@ console.log(allWords.slice(1, 3)); // World I'm 左臂右开原则；1,2 要（�
   const list = [1, 2, [3, 4, 5, [6, [(7, 8, 9)]]]];
   console.log(list);
 
-  const newList = list.flat(); // list.flat(1)
+  const newList = list.flat(); // 等于list.flat(1)
   console.log(newList);
 
   const newList2 = list.flat(2);
@@ -228,7 +251,7 @@ console.log(allWords.slice(1, 3)); // World I'm 左臂右开原则；1,2 要（�
   const newList3 = list.flat(3);
   console.log(newList3);
 
-  const newList4 = list.flat(Infinity); // infinity 表示打碎无限层，完全撑平
+  const newList4 = list.flat(Infinity); // infinity 表示打碎无限层array，完全撑平
   console.log(newList4);
 }
 
@@ -238,11 +261,11 @@ console.log(allWords.slice(1, 3)); // World I'm 左臂右开原则；1,2 要（�
     2: "B",
     3: "c",
   };
-  console.log(Object.keys(obj)); //Object自带属性，冒号前的前缀
+  console.log(Object.keys(obj)); //Object自带属性，冒号前的前缀['1','2','3']
   console.log(Object.values(obj)); //ABC，冒号后的关键字
 
   const list = ["A", "B", "C"];
-  console.log(list.keys()); // list实体原型链的属性，迭代器012
+  console.log(list.keys()); // list实体原型链的属性，iterator迭代器012
   const iter = list.keys();
   console.log(iter.next().value); //0
   console.log(iter.next().value); //1
@@ -311,15 +334,17 @@ console.log(allWords.slice(1, 3)); // World I'm 左臂右开原则；1,2 要（�
     //const result = (sth === +sth)
     //console.log(result);
     //return result
-    return sth === +sth; //=== 用来作比较
+    return sth === +sth; //=== 用来作比较 加+号变数字，
+    
   }
+
   function A() {
     return "a";
   }
 //function（）里面的是参数，需要设置一个参数并且使用它就在括号里面加上，如果括号是空的就是不需要这个参数
 
   const content = A();
-  console.log(content); //A()你这个不需要用到任何参数，那就空着
+  console.log(content); //A()有括号执行返回了信息，A没括号返回函数
 
   function B(sth) {
     console.log(sth);
@@ -327,7 +352,7 @@ console.log(allWords.slice(1, 3)); // World I'm 左臂右开原则；1,2 要（�
 
   B(list);
   isNumber(0);
-  const filterList = list.filter((element) => isNumber(element));
+  const filterList = list.filter((element) => isNumber(element)); //filter筛选出只留下数字，加叹号!isNumber反向筛选只留其他
 
   console.log(filterList);
 
@@ -346,12 +371,15 @@ console.log(allWords.slice(1, 3)); // World I'm 左臂右开原则；1,2 要（�
   }
 
   const filterList = flatList.filter((element) => isNumber(element));
+
   console.log(filterList);
 
-  const setList = [...new Set(filterList)];
+  const setList = [...new Set(filterList)]; //set唯一化处理，把重合的干掉
+  
   console.log(setList);
 
   const sortList = setList.sort((a, b) => a - b);
+
   console.log(sortList);
 }
 
